@@ -1,11 +1,9 @@
 package com.herokuapp.ourairports.plugins
 
 import com.github.mustachejava.DefaultMustacheFactory
-import io.ktor.mustache.Mustache
-import io.ktor.mustache.MustacheContent
 import io.ktor.application.*
+import io.ktor.mustache.*
 import io.ktor.response.*
-import io.ktor.request.*
 import io.ktor.routing.*
 
 fun Application.configureTemplating() {

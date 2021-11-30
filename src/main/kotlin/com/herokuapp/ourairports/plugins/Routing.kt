@@ -1,5 +1,6 @@
 package com.herokuapp.ourairports.plugins
 
+import com.herokuapp.ourairports.features.grabber.updateRemoteFiles
 import com.herokuapp.ourairports.features.runways.runwaysJson
 import io.ktor.application.*
 import io.ktor.features.*
@@ -11,6 +12,7 @@ import io.ktor.routing.*
 fun Application.configureRouting() {
 
     runwaysJson()
+    updateRemoteFiles()
 
     routing {
         get("/") {
