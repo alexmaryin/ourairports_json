@@ -3,9 +3,9 @@ package com.herokuapp.ourairports.data.database
 import com.herokuapp.ourairports.data.model.AirportsTable
 import com.herokuapp.ourairports.data.model.RunwaysTable
 import com.herokuapp.ourairports.data.model.toAirport
+import com.herokuapp.ourairports.data.model.toRunway
 import com.herokuapp.ourairports.repository.model.Airport
 import com.herokuapp.ourairports.repository.model.Runway
-import com.herokuapp.ourairports.repository.model.toRunway
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -13,6 +13,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 class AirportsDbImpl(
     private val db: Database
 ) : AirportsDb {
+
     override suspend fun getAirportByICAO(code: String): Airport? =
         transaction(db) {
             val airport = AirportsTable.select { AirportsTable.icao eq code }.firstOrNull()

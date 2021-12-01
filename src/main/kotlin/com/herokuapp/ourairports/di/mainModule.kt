@@ -7,6 +7,8 @@ import com.herokuapp.ourairports.data.database.AirportsDbImpl
 import com.herokuapp.ourairports.data.model.AirportsTable
 import com.herokuapp.ourairports.data.model.FrequenciesTable
 import com.herokuapp.ourairports.data.model.RunwaysTable
+import com.herokuapp.ourairports.repository.AirportsRepository
+import com.herokuapp.ourairports.repository.AirportsRepositoryImpl
 import com.herokuapp.ourairports.repository.RunwaysRepository
 import com.herokuapp.ourairports.repository.RunwaysRepositoryImpl
 import org.jetbrains.exposed.sql.Database
@@ -24,5 +26,6 @@ val mainModule = module {
     single<ConverterFactory> { OurAirportsFactory(db) }
     single<AirportsDb> { AirportsDbImpl(db) }
     single<RunwaysRepository> { RunwaysRepositoryImpl(get()) }
+    single<AirportsRepository> { AirportsRepositoryImpl(get()) }
 
 }

@@ -1,7 +1,10 @@
 package com.herokuapp.ourairports.data.model
 
+import com.herokuapp.ourairports.repository.model.Runway
+import com.herokuapp.ourairports.repository.model.serializers.RunwaySurfaceSerializer
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Column
+import org.jetbrains.exposed.sql.ResultRow
 
 object RunwaysTable : IntIdTable() {
     val airportId: Column<Int> = integer("airport_ref")
@@ -16,3 +19,17 @@ object RunwaysTable : IntIdTable() {
     val highElevationFeet: Column<Int?> = integer("he_elevation_ft").nullable()
     val highHeading: Column<Int> = integer("he_heading_degT")
 }
+
+
+fun ResultRow.toRunway() = Runway(
+    lengthFeet = this[RunwaysTable.lengthFeet],
+    widthFeet = this[RunwaysTable.widthFeet],
+    surface = RunwaySurfaceSerializer.getByString(this[RunwaysTable.surface]),
+    closed = this[RunwaysTable.closed],
+    lowNumber = this[RunwaysTable.lowNumber],
+    lowElevationFeet = this[RunwaysTable.lowElevationFeet],
+    lowHeading = this[RunwaysTable.lowHeading],
+    highNumber = this[RunwaysTable.highNumber],
+    highElevationFeet = this[RunwaysTable.highElevationFeet],
+    highHeading = this[RunwaysTable.highHeading]
+)

@@ -1,6 +1,6 @@
 package com.herokuapp.ourairports.features.runways
 
-import com.herokuapp.ourairports.features.runways.utils.correctIcao
+import com.herokuapp.ourairports.features.utils.correctIcao
 import org.junit.Test
 import kotlin.test.assertEquals
 
