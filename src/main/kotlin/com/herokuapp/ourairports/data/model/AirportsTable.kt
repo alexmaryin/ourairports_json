@@ -1,7 +1,12 @@
 package com.herokuapp.ourairports.data.model
 
+import com.herokuapp.ourairports.repository.model.Airport
+import com.herokuapp.ourairports.repository.model.Frequency
+import com.herokuapp.ourairports.repository.model.Runway
+import com.herokuapp.ourairports.repository.model.enums.AirportType
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Column
+import org.jetbrains.exposed.sql.ResultRow
 
 object AirportsTable : IntIdTable() {
     val icao: Column<String> = varchar("ident", 4)
@@ -13,3 +18,19 @@ object AirportsTable : IntIdTable() {
     val webSite: Column<String?> = varchar("home_link", 300).nullable()
     val wiki: Column<String?> = varchar("wikipedia_link", 300).nullable()
 }
+
+fun ResultRow.toAirport(
+    frequencies: List<Frequency>,
+    runways: List<Runway>
+) = Airport(
+    icao = this[AirportsTable.icao],
+    type = AirportType.valueOf(this[AirportsTable.type]),
+    name = this[AirportsTable.name],
+    latitude = this[AirportsTable.latitude],
+    longitude = this[AirportsTable.longitude],
+    elevation = this[AirportsTable.elevation],
+    webSite = this[AirportsTable.webSite],
+    wiki = this[AirportsTable.wiki],
+    frequencies = frequencies,
+    runways = runways
+)

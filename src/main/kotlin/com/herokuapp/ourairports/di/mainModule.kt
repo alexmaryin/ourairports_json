@@ -2,6 +2,8 @@ package com.herokuapp.ourairports.di
 
 import com.herokuapp.ourairports.data.converters.ConverterFactory
 import com.herokuapp.ourairports.data.converters.OurAirportsFactory
+import com.herokuapp.ourairports.data.database.AirportsDb
+import com.herokuapp.ourairports.data.database.AirportsDbImpl
 import com.herokuapp.ourairports.data.model.AirportsTable
 import com.herokuapp.ourairports.data.model.FrequenciesTable
 import com.herokuapp.ourairports.data.model.RunwaysTable
@@ -19,7 +21,8 @@ val mainModule = module {
         SchemaUtils.create(AirportsTable, FrequenciesTable, RunwaysTable)
     }
 
-    single<RunwaysRepository> { RunwaysRepositoryImpl() }
-
     single<ConverterFactory> { OurAirportsFactory(db) }
+    single<AirportsDb> { AirportsDbImpl(db) }
+    single<RunwaysRepository> { RunwaysRepositoryImpl(get()) }
+
 }

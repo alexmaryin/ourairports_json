@@ -12,7 +12,7 @@ object RunwaySurfaceSerializer : KSerializer<RunwaySurface> {
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("RunwaySurface", PrimitiveKind.STRING)
 
-    override fun deserialize(decoder: Decoder): RunwaySurface = when(decoder.decodeString().uppercase()) {
+    fun getByString(value: String) = when(value.uppercase()) {
         "ASP" -> RunwaySurface.ASPHALT
         "TURF" -> RunwaySurface.TURF
         "CON" -> RunwaySurface.CONCRETE
@@ -21,6 +21,8 @@ object RunwaySurfaceSerializer : KSerializer<RunwaySurface> {
         "WATER" -> RunwaySurface.WATER
         else -> RunwaySurface.UNKNOWN
     }
+
+    override fun deserialize(decoder: Decoder): RunwaySurface = getByString(decoder.decodeString())
 
     override fun serialize(encoder: Encoder, value: RunwaySurface) {
         encoder.encodeString(value.short)
