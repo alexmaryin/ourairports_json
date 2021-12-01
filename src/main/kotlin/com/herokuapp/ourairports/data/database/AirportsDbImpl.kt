@@ -22,7 +22,6 @@ class AirportsDbImpl(
             }
         }
 
-    override suspend fun getRunwaysByAirportICAO(code: String): List<Runway>? {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getRunwaysByAirportICAO(code: String): List<Runway>? =
+        getAirportByICAO(code)?.runways
 }

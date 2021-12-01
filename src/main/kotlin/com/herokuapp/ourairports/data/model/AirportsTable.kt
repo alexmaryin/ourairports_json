@@ -4,6 +4,7 @@ import com.herokuapp.ourairports.repository.model.Airport
 import com.herokuapp.ourairports.repository.model.Frequency
 import com.herokuapp.ourairports.repository.model.Runway
 import com.herokuapp.ourairports.repository.model.enums.AirportType
+import com.herokuapp.ourairports.repository.model.enums.toAirportType
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Column
 import org.jetbrains.exposed.sql.ResultRow
@@ -24,7 +25,7 @@ fun ResultRow.toAirport(
     runways: List<Runway>
 ) = Airport(
     icao = this[AirportsTable.icao],
-    type = AirportType.valueOf(this[AirportsTable.type]),
+    type = this[AirportsTable.type].toAirportType(),
     name = this[AirportsTable.name],
     latitude = this[AirportsTable.latitude],
     longitude = this[AirportsTable.longitude],

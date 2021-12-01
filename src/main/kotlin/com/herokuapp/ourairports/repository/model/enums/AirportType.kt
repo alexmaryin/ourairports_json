@@ -12,3 +12,13 @@ enum class AirportType {
     @SerialName("seaplane_base") SEA_BASE,
     @SerialName("small_airport") SMALL
 }
+
+fun String.toAirportType() = when(this) {
+    "closed_airport" -> AirportType.CLOSED
+    "heliport" -> AirportType.HELIPORT
+    "large_airport" -> AirportType.LARGE
+    "medium_airport" -> AirportType.MEDIUM
+    "seaplane_base" -> AirportType.SEA_BASE
+    "small_airport" -> AirportType.SMALL
+    else -> throw TypeCastException("Unknown airport type")
+}
