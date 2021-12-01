@@ -1,6 +1,6 @@
 package com.herokuapp.ourairports.repository.model.serializers
 
-import com.herokuapp.ourairports.repository.model.RunwaySurface
+import com.herokuapp.ourairports.repository.model.enums.RunwaySurface
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor

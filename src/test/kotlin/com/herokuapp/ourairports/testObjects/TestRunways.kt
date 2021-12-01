@@ -1,7 +1,7 @@
 package com.herokuapp.ourairports.testObjects
 
 import com.herokuapp.ourairports.repository.model.Runway
-import com.herokuapp.ourairports.repository.model.RunwaySurface
+import com.herokuapp.ourairports.repository.model.enums.RunwaySurface
 
 object TestRunways {
     val UWLL = listOf(

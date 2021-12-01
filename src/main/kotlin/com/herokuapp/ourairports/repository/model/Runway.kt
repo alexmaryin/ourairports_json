@@ -1,5 +1,6 @@
 package com.herokuapp.ourairports.repository.model
 
+import com.herokuapp.ourairports.repository.model.enums.RunwaySurface
 import com.herokuapp.ourairports.repository.model.serializers.RunwaySurfaceSerializer
 import kotlinx.serialization.Serializable
 
@@ -16,13 +17,3 @@ data class Runway(
     val highElevationFeet: Int? = null,
     val highHeading: Int,
 )
-
-enum class RunwaySurface(val short: String) {
-    ASPHALT("ASP"),
-    TURF("TURF"),
-    CONCRETE("CON"),
-    GRASS("GRS"),
-    GRAVEL("GRE"),
-    WATER("WATER"),
-    UNKNOWN("UNK")
-}

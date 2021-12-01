@@ -1,6 +1,6 @@
 package com.herokuapp.ourairports.repository.model.serializers
 
-import com.herokuapp.ourairports.repository.model.FrequencyType
+import com.herokuapp.ourairports.repository.model.enums.FrequencyType
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor

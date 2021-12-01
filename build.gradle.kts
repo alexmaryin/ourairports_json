@@ -2,11 +2,12 @@ val ktorVersion: String by project
 val kotlinVersion: String by project
 val logbackVersion: String by project
 val koinVersion: String by project
+val exposedVersion: String by project
 
 plugins {
     application
     kotlin("jvm") version "1.6.0"
-                id("org.jetbrains.kotlin.plugin.serialization") version "1.6.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.6.0"
 }
 
 group = "com.herokuapp.ourairports"
@@ -32,7 +33,16 @@ dependencies {
 
     implementation("io.insert-koin:koin-ktor:$koinVersion")
 
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+//    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+    implementation("com.h2database:h2:1.4.199")
+
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
     testImplementation("io.insert-koin:koin-test:$koinVersion")
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
 }

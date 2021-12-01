@@ -1,6 +1,6 @@
 package com.herokuapp.ourairports.repository.model
 
-import kotlinx.serialization.SerialName
+import com.herokuapp.ourairports.repository.model.enums.AirportType
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -16,13 +16,3 @@ data class Airport(
     val frequencies: List<Frequency> = emptyList(),
     val runways: List<Runway> = emptyList()
 )
-
-@Serializable
-enum class AirportType {
-    @SerialName("closed_airport") CLOSED,
-    @SerialName("heliport") HELIPORT,
-    @SerialName("large_airport") LARGE,
-    @SerialName("medium_airport") MEDIUM,
-    @SerialName("seaplane_base") SEA_BASE,
-    @SerialName("small_airport") SMALL
-}
