@@ -18,7 +18,17 @@ import org.koin.dsl.module
 
 val mainModule = module {
 
-    val db = Database.connect("jdbc:h2:./files/database_v1", "org.h2.Driver")
+//    val db = Database.connect("jdbc:h2:./files/database_v1", "org.h2.Driver")
+    val url = System.getenv("DB_HOST") ?: "ec2-79-125-30-28.eu-west-1.compute.amazonaws.com:5432"
+    val name = System.getenv("DB_NAME") ?: "dniqhm0ujhv77"
+    val user = System.getenv("DB_USER") ?: "osyswcbzuxrbdv"
+    val password = System.getenv("DB_PASSWORD") ?: "008f574aba660a765879bc487394b0712201ffc4eb138aa4dcaaa7c63477a5a4"
+    val db = Database.connect(
+        url = "jdbc:postgresql://$url/$name?sslmode=require",
+        driver = "org.postgresql.Driver",
+        user = user,
+        password = password
+    )
     transaction(db) {
         SchemaUtils.create(AirportsTable, FrequenciesTable, RunwaysTable)
     }
