@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.statistics.ReportStatisticsToElasticSearch.url
+
 val ktorVersion: String by project
 val kotlinVersion: String by project
 val logbackVersion: String by project
@@ -34,7 +36,6 @@ dependencies {
     implementation("io.insert-koin:koin-ktor:$koinVersion")
 
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
-//    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
     implementation("com.h2database:h2:1.4.199")
 
@@ -45,4 +46,8 @@ dependencies {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
     kotlinOptions.freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+}
+
+tasks.create("stage") {
+    dependsOn("installDist")
 }

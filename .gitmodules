@@ -1,0 +1,3 @@
+[submodule "openapigen"]
+	path = openapigen
+	url = https://github.com/1gravity/Ktor-OpenAPI-Generator.git

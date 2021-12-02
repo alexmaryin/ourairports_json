@@ -1,9 +1,6 @@
 package com.herokuapp.ourairports.data.database
 
-import com.herokuapp.ourairports.data.model.AirportsTable
-import com.herokuapp.ourairports.data.model.RunwaysTable
-import com.herokuapp.ourairports.data.model.toAirport
-import com.herokuapp.ourairports.data.model.toRunway
+import com.herokuapp.ourairports.data.model.*
 import com.herokuapp.ourairports.repository.model.Airport
 import com.herokuapp.ourairports.repository.model.Runway
 import org.jetbrains.exposed.sql.Database
@@ -18,8 +15,13 @@ class AirportsDbImpl(
         transaction(db) {
             val airport = AirportsTable.select { AirportsTable.icao eq code }.firstOrNull()
             airport?.let {
-                val runways = RunwaysTable.select { RunwaysTable.airportId eq it[AirportsTable.id].value }
-                it.toAirport(emptyList(), runways.map { row -> row.toRunway() })
+                val id = it[AirportsTable.id].value
+                val runways = RunwaysTable.select { RunwaysTable.airportId eq id }
+                val frequencies = FrequenciesTable.select { FrequenciesTable.airportId eq id }
+                it.toAirport(
+                    frequencies = frequencies.map { row -> row.toFrequency() },
+                    runways = runways.map { row -> row.toRunway() }
+                )
             }
         }
 

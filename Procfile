@@ -1,0 +1,1 @@
+web: ./build/install/com.herokuapp.ourairports/bin/com.herokuapp.ourairports

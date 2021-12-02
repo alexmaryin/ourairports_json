@@ -12,7 +12,7 @@ object FrequencyTypeSerializer : KSerializer<FrequencyType> {
     override val descriptor: SerialDescriptor =
         PrimitiveSerialDescriptor("FrequencyType", PrimitiveKind.STRING)
 
-    override fun deserialize(decoder: Decoder): FrequencyType = when(decoder.decodeString().uppercase()) {
+    fun getByString(value: String) = when(value.uppercase()) {
         "A/D", "A/G", "DIR", "TML" -> FrequencyType.TERMINAL
         "AAS", "CTAF" -> FrequencyType.ADVISORY_SERVICE
         "ACC", "ACC SECTOR" -> FrequencyType.RADAR
@@ -30,6 +30,9 @@ object FrequencyTypeSerializer : KSerializer<FrequencyType> {
         "TOWER", "TWR" -> FrequencyType.TOWER
         else -> FrequencyType.UNRECOGNIZED
     }
+
+    override fun deserialize(decoder: Decoder): FrequencyType =
+        getByString(decoder.decodeString())
 
     override fun serialize(encoder: Encoder, value: FrequencyType) {
         encoder.encodeString(value.short)
