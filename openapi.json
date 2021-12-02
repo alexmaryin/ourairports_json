@@ -1,0 +1,192 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "OurAirports",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "localhost:8080"
+    }
+  ],
+  "paths": {
+    "/api/v1/airports/{icao}": {
+      "get": {
+        "summary": "Return Airport with radio frequencies and runways details.",
+        "operationId": "Airport",
+        "tags": [
+          "airport"
+        ],
+        "parameters": [
+          {
+            "name": "icao",
+            "in": "path",
+            "description": "4-letter ICAO code of airport",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Airport data with radio frequencies and runways details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Airport"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Frequency": {
+        "type": "object",
+        "required": [
+          "type",
+          "valueMhz"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "ATIS"
+          },
+          "description": {
+            "type": "string",
+            "example": ""
+          },
+          "valueMhz": {
+            "type": "number",
+            "example": "128.85"
+          }
+        }
+      },
+      "Runway": {
+        "type": "object",
+        "required": [
+          "surface",
+          "closed",
+          "lowNumber",
+          "lowHeading",
+          "highNumber",
+          "highHeading"
+        ],
+        "properties": {
+          "lengthFeet": {
+            "type": "integer",
+            "format": "int32",
+            "example": "10171"
+          },
+          "widthFeet": {
+            "type": "integer",
+            "format": "int32",
+            "example": "148"
+          },
+          "surface": {
+            "type": "string",
+            "example": "ASP"
+          },
+          "closed": {
+            "type": "boolean"
+          },
+          "lowNumber": {
+            "type": "string",
+            "example": "02"
+          },
+          "lowElevationFeet": {
+            "type": "integer",
+            "format": "int32",
+            "example": "449"
+          },
+          "lowHeading": {
+            "type": "integer",
+            "format": "int32",
+            "example": "19"
+          },
+          "highNumber": {
+            "type": "string",
+            "example": "20"
+          },
+          "highElevationFeet": {
+            "type": "integer",
+            "format": "int32",
+            "example": "377"
+          },
+          "highHeading": {
+            "type": "integer",
+            "format": "int32",
+            "example": "199"
+          }
+        }
+      },
+      "Airport": {
+        "type": "object",
+        "required": [
+          "icao",
+          "type",
+          "name",
+          "latitude",
+          "longitude",
+          "elevation",
+          "frequencies",
+          "runways"
+        ],
+        "properties": {
+          "icao": {
+            "type": "string",
+            "example": "UWLL"
+          },
+          "type": {
+            "type": "string",
+            "example": "medium_airport"
+          },
+          "name": {
+            "type": "string",
+            "example": "Ulyanovsk Baratayevka Airport"
+          },
+          "latitude": {
+            "type": "number",
+            "example": "54.2683"
+          },
+          "longitude": {
+            "type": "number",
+            "example": "48.2267"
+          },
+          "elevation": {
+            "type": "integer",
+            "format": "int32",
+            "example": "449"
+          },
+          "webSite": {
+            "type": "string",
+            "example": "http://ulk.aero/"
+          },
+          "wiki": {
+            "type": "string",
+            "example": "https://en.wikipedia.org/wiki/Ulyanovsk_Baratayevka_Airport"
+          },
+          "frequencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Frequency"
+            }
+          },
+          "runways": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Runway"
+            }
+          }
+        }
+      }
+    }
+  }
+}
