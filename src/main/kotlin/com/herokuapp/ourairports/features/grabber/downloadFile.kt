@@ -7,16 +7,14 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.TimeoutCancellationException
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
-import kotlinx.coroutines.flow.flow
 import java.io.File
 
 @OptIn(ExperimentalCoroutinesApi::class)
 suspend fun HttpClient.downloadFile(filename: String, url: String) = channelFlow {
-    try {
+    if (File(filename).exists()) {
+        send(DownloadResult.Success)
+    } else try {
         val response = get<HttpResponse>(url) {
             onDownload { bytesSentTotal, contentLength ->
                 val percent = (bytesSentTotal / contentLength) * 100
