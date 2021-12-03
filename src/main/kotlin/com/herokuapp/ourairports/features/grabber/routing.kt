@@ -1,6 +1,5 @@
 package com.herokuapp.ourairports.features.grabber
 
-import com.herokuapp.ourairports.data.converters.ConverterFactory
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.response.*
@@ -9,11 +8,11 @@ import org.koin.ktor.ext.inject
 
 fun Application.updateRemoteFiles() {
 
-    val converterFactory: ConverterFactory by inject()
+    val grabber: AirportsGrabber by inject()
 
     routing {
         get("/api/v1/updatebase") {
-            grabToMemory(log, converterFactory)
+            grabber.grabToDatabase(FilesLinks.files, FilesLinks.BASE_URL)
             call.respond(HttpStatusCode.OK, "Downloading and mapping started")
         }
     }

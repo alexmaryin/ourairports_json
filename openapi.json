@@ -1,15 +1,32 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
     "title": "OurAirports",
+    "description": "Allows to receive World airports information in JSON format",
+    "contact": {
+      "name": "Alex Maryin",
+      "url": "https://github.com/alexmaryin/ourairports_json",
+      "email": "java.ul@gmail.com"
+    },
     "license": {
-      "name": "MIT"
-    }
+      "name": "MIT License",
+      "identifier": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "x-api-id": "78f2dcde-540f-11ec-bf63-0242ac130002",
+    "x-audience": [
+      "external-public"
+    ]
   },
   "servers": [
     {
-      "url": "localhost:8080"
+      "url": "https://ourairports-json.herokuapp.com",
+      "description": "Production server"
+    },
+    {
+      "url": "localhost:8080",
+      "description": "Development and debug server"
     }
   ],
   "paths": {
@@ -41,6 +58,94 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Incorrect ICAO code"
+          },
+          "404": {
+            "description": "Airport with ICAO not found"
+          }
+        }
+      }
+    },
+    "/api/v1/runways/{icao}": {
+      "get": {
+        "summary": "Return runways details for airport with specified ICAO.",
+        "operationId": "Runways",
+        "tags": [
+          "runways"
+        ],
+        "parameters": [
+          {
+            "name": "icao",
+            "in": "path",
+            "description": "4-letter ICAO code of airport",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Runways details for airport with specified ICAO.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Runway"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect ICAO code"
+          },
+          "404": {
+            "description": "Airport with ICAO not found"
+          }
+        }
+      }
+    },
+    "/api/v1/frequencies/{icao}": {
+      "get": {
+        "summary": "Return radio details for airport with specified ICAO.",
+        "operationId": "Frequencies",
+        "tags": [
+          "frequencies"
+        ],
+        "parameters": [
+          {
+            "name": "icao",
+            "in": "path",
+            "description": "4-letter ICAO code of airport",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Radio details for airport with specified ICAO.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Frequency"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Incorrect ICAO code"
+          },
+          "404": {
+            "description": "Airport with ICAO not found"
           }
         }
       }
@@ -61,10 +166,11 @@
           },
           "description": {
             "type": "string",
-            "example": ""
+            "example": "Weather information"
           },
           "valueMhz": {
             "type": "number",
+            "format": "float",
             "example": "128.85"
           }
         }
@@ -142,7 +248,8 @@
         "properties": {
           "icao": {
             "type": "string",
-            "example": "UWLL"
+            "example": "UWLL",
+            "length": 4
           },
           "type": {
             "type": "string",

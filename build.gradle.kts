@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.statistics.ReportStatisticsToElasticSearch.url
-
 val ktorVersion: String by project
 val kotlinVersion: String by project
 val logbackVersion: String by project
@@ -40,6 +38,7 @@ dependencies {
     implementation("com.h2database:h2:1.4.199")
 
     testImplementation("io.ktor:ktor-server-tests:$ktorVersion")
+    testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
     testImplementation("io.insert-koin:koin-test:$koinVersion")
 }

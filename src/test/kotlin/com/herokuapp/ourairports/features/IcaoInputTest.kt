@@ -1,4 +1,4 @@
-package com.herokuapp.ourairports.features.runways
+package com.herokuapp.ourairports.features
 
 import com.herokuapp.ourairports.features.utils.correctIcao
 import org.junit.Test

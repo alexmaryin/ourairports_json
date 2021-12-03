@@ -7,7 +7,11 @@ import com.herokuapp.ourairports.data.database.AirportsDbImpl
 import com.herokuapp.ourairports.data.model.AirportsTable
 import com.herokuapp.ourairports.data.model.FrequenciesTable
 import com.herokuapp.ourairports.data.model.RunwaysTable
+import com.herokuapp.ourairports.features.grabber.AirportsGrabber
+import com.herokuapp.ourairports.features.grabber.AirportsGrabberImpl
 import com.herokuapp.ourairports.repository.*
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -21,9 +25,12 @@ val mainModule = module {
         SchemaUtils.create(AirportsTable, FrequenciesTable, RunwaysTable)
     }
 
+    val client = HttpClient(CIO)
+
     single<ConverterFactory> { OurAirportsFactory(db) }
     single<AirportsDb> { AirportsDbImpl(db) }
     single<RunwaysRepository> { RunwaysRepositoryImpl(get()) }
     single<AirportsRepository> { AirportsRepositoryImpl(get()) }
     single<FrequenciesRepository> { FrequenciesRepositoryImpl(get()) }
+    single<AirportsGrabber> { AirportsGrabberImpl(get(), client) }
 }
