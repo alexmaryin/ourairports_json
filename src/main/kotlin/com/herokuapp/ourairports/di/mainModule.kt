@@ -19,8 +19,7 @@ import org.koin.dsl.module
 
 val mainModule = module {
 
-    val db = Database.connect("jdbc:h2:mem:regular;DB_CLOSE_DELAY=-1;", "org.h2.Driver")
-
+    val db = Database.connect("jdbc:h2:./files/database_v1", "org.h2.Driver")
     transaction(db) {
         SchemaUtils.create(AirportsTable, FrequenciesTable, RunwaysTable)
     }
