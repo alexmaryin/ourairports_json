@@ -21,12 +21,12 @@
   },
   "servers": [
     {
-      "url": "https://ourairports-json.herokuapp.com",
-      "description": "Production server"
+      "url": "http://ec2-13-51-70-132.eu-north-1.compute.amazonaws.com/api/v1",
+      "description": "Main production server"
     },
     {
-      "url": "localhost:8080",
-      "description": "Development and debug server"
+      "url": "https://ourairports-json.herokuapp.com",
+      "description": "Standby production server"
     }
   ],
   "paths": {
@@ -162,6 +162,7 @@
         "properties": {
           "type": {
             "type": "string",
+            "enum": ["TML", "CTAF", "CTR", "AFIS", "APP", "RMP", "ARR", "ATIS", "UNIC", "DEL", "CTR", "DEP", "FIRE", "GND", "TWR", "UNKNOWN"],
             "example": "ATIS"
           },
           "description": {
@@ -198,6 +199,7 @@
           },
           "surface": {
             "type": "string",
+            "enum": ["ASP", "TURF", "CON", "GRS","GRE", "WATER","UNK"],
             "example": "ASP"
           },
           "closed": {
@@ -253,6 +255,7 @@
           },
           "type": {
             "type": "string",
+            "enum": ["closed_airport", "heliport", "large_airport", "medium_airport", "seaplane_base", "small_airport"],
             "example": "medium_airport"
           },
           "name": {
