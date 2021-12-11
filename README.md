@@ -93,8 +93,15 @@ Return radio details for airport with specified ICAO.
           ]
         }
 ```
+Airport type may have one of the following values:
+* closed_airport
+* heliport
+* large_airport
+* medium_airport
+* seaplane_base
+* small_airport
 
-### Runwas
+### Runways
 ```json
 "Runway": {
           "lengthFeet": {
@@ -136,6 +143,14 @@ Return radio details for airport with specified ICAO.
           }
         }
 ```
+Surface type may have one of the following values:
+* ASP - asphalt
+* TURF - turf
+* CON - concrete
+* GRS - grass
+* GRE - gravel
+* WATER - water
+* UNK - unknown
 
 ### Frequency
 ```json
@@ -153,6 +168,22 @@ Return radio details for airport with specified ICAO.
           }
         }
 ```
+Frequency type may have one of the following values:
+* TML - terminal area
+* CTAF - flight advisory service
+* CTR - radar/control area
+* UNKNOWN
+* AFIS - flight information service
+* APP - approach
+* RMP - apron
+* ARR - arrival
+* ATIS - weather observation automatic service
+* UNIC - unicom
+* DEL - delivery
+* DEP - departure
+* FIRE - emergency service
+* GND - ground
+* TWR - tower
 
 ## License
 

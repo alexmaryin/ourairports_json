@@ -3,7 +3,6 @@ package com.herokuapp.ourairports.repository.model.enums
 enum class FrequencyType(val short: String) {
     TERMINAL("TML"),
     ADVISORY_SERVICE("CTAF"),
-    RADAR("CTR"),
     UNRECOGNIZED("UNKNOWN"),
     FLIGHT_INFORMATION_SERVICE("AFIS"),
     APPROACH("APP"),

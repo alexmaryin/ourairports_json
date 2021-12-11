@@ -15,7 +15,6 @@ object FrequencyTypeSerializer : KSerializer<FrequencyType> {
     fun getByString(value: String) = when(value.uppercase()) {
         "A/D", "A/G", "DIR", "TML" -> FrequencyType.TERMINAL
         "AAS", "CTAF" -> FrequencyType.ADVISORY_SERVICE
-        "ACC", "ACC SECTOR" -> FrequencyType.RADAR
         "AFIS", "FIS", "INFO" -> FrequencyType.FLIGHT_INFORMATION_SERVICE
         "APP", "APPR", "APPROACH" -> FrequencyType.APPROACH
         "APRON", "RMP" -> FrequencyType.APRON
@@ -23,7 +22,7 @@ object FrequencyTypeSerializer : KSerializer<FrequencyType> {
         "ASOS", "AWOS", "ATIS" -> FrequencyType.WEATHER_OBSERVATION
         "ATF", "UNICOM", "UNIC" -> FrequencyType.UNICOM
         "CLD", "CLEARANCE", "DEL", "DELIVERY", "DLV", "GCD", "GCCD" -> FrequencyType.DELIVERY
-        "CNTR", "CTR", "CONTROL", "CTRL", "FIA", "FIR", "FSS", "RAD", "RADAR", "RDR" -> FrequencyType.RADAR_CONTROL
+        "ACC", "ACC SECTOR", "CNTR", "CTR", "CONTROL", "CTRL", "FIA", "FIR", "FSS", "RAD", "RADAR", "RDR" -> FrequencyType.RADAR_CONTROL
         "DEP", "DEPT", "DPR" -> FrequencyType.DEPARTURE
         "EMR", "FIRE" -> FrequencyType.EMERGENCY
         "GND", "GRND", "GROUND" -> FrequencyType.GROUND
