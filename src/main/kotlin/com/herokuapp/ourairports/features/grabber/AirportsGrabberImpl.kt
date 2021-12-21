@@ -14,7 +14,7 @@ class AirportsGrabberImpl(
     override suspend fun grabToDatabase(files: List<String>, url: String) {
         with(client) {
             files.forEach { filename ->
-                downloadFile("files/$filename", "$url/$filename?raw=true")
+                downloadFile("files/$filename", "$url/$filename")
                     .onEach {
                         it.onError { _, error ->
                             println("$filename download error: ${error?.localizedMessage}")
